@@ -8,9 +8,7 @@ const app = express()
 // JSON middleware
 app.use(express.json())
 
-app.get('/api/v1/users', (req, res) => {
-    res.status(200).json({message: 'Route is working'})
-})
+app.use('/api/v1/users/', userRoutes)
 
 // Listen to port
 app.listen(config.env.port, () => {

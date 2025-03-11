@@ -2,8 +2,8 @@ import express from "express";
 
 const router = express.Router()
 
-router.post('/', (req, res) => {
-    res.status(200).jsm({messge: 'Route is working'})
+router.get('/', (req, res) => {
+    res.status(200).json({message: 'Route is working'})
 })
 
 export default router
