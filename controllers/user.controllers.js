@@ -1,14 +1,17 @@
 import User from "../models/user.models.js"
+import bcrypt from "bcryptjs"
 
 const signupUser = async (req, res) => {
     const { email, fullName, password, gender, telephone, dateOfBirth, country } = req.body
     
     if (!email || !fullName || !password || !gender || !telephone || !dateOfBirth || !country) return res.status(400).json({ message: 'Ensure all field are provided with data' })
     
+    const hashedPassword = bcrypt.hashSync(password, 10)
+
     try {
         
         const newUser = new User({
-            email, fullName, password, gender, telephone, dateOfBirth, country
+            email, fullName, hashedPassword, gender, telephone, dateOfBirth, country
         })
         
         const createdUser = await newUser.save()
