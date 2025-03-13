@@ -8,7 +8,7 @@ const app = express()
 // JSON middleware
 app.use(express.json())
 
-app.use('/api/v1/users/', userRoutes)
+app.use('/api/v1/auth/', userRoutes)
 
 // Listen to port
 app.listen(config.env.port, () => {
