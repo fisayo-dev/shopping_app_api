@@ -4,10 +4,10 @@ import { deleteItemFromCart, updateItemInCart, addItemToCart, getAllItemsInCart,
 
 const router = Router()
 
-router.get('/all-items/user/:user_id', getAllItemsInCart)
-router.get('/all-items/:id/user/:user_id', getParticularItemInCart)
-router.post('/', addItemToCart)
-router.put('/:id', updateItemInCart)
-router.delete('/:id', deleteItemFromCart)
+router.get('/users/:user_id', getAllItemsInCart)
+router.get('/:id/users/:user_id', getParticularItemInCart)
+router.post('/users/:user_id', addItemToCart)
+router.put('/:id/users/:user_id', updateItemInCart)
+router.delete('/:id/users/:user_id', deleteItemFromCart)
 
 export default router
