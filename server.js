@@ -1,6 +1,7 @@
 import express from 'express'
 import mongoose from 'mongoose'
 import config from './config/index.js'
+import authRouter from './routes/auth.routes.js'
 import userRoutes from './routes/user.routes.js'
 
 const app = express()
@@ -8,7 +9,8 @@ const app = express()
 // JSON middleware
 app.use(express.json())
 
-app.use('/api/v1/auth/', userRoutes)
+app.use('/api/v1/auth/', authRouter)
+app.use('/api/v1/users/', userRoutes)
 
 // Listen to port
 app.listen(config.env.port, () => {
