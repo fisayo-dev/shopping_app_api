@@ -18,4 +18,6 @@ app.listen(config.env.port, () => {
 console.log(`Server running on port ${config.env.port}`)
 })
 
+export default app
+
 
