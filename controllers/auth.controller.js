@@ -25,4 +25,13 @@ const signupUser = async (req, res) => {
     }
 }
 
-export {signupUser}
+const signinUser = async (req, res) => {
+    
+}
+
+const signoutUser = async (req, res) => {
+    
+}
+
+
+export {signupUser,signoutUser, signinUser}
