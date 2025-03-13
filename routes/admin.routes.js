@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { signinAdmin, signoutAdmin, signupAdmin } from "../controllers/admin.controller";
 
 const router = Router()
 
