@@ -2,7 +2,7 @@ const errMiddleware = (err, res, req, next) => {
     try {
         let error = { ...err }
         error.message = err.message
-        console.err(error)
+        console.error(error)
 
         // Mongoose bag objectId
         if (err.name === 'CastError') {
