@@ -1,6 +1,6 @@
 import express from 'express'
 import config from './config/index.js'
-import authRouter from './routes/auth.routes.js'
+import authRoutes from './routes/auth.routes.js'
 import userRoutes from './routes/user.routes.js'
 import cartRoutes from './routes/cart.routes.js'
 import adminRoutes from './routes/admin.routes.js'
@@ -11,7 +11,7 @@ const app = express()
 // JSON middleware
 app.use(express.json())
 
-app.use('/api/v1/auth/', authRouter)
+app.use('/api/v1/auth/', authRoutes)
 app.use('/api/v1/users/', userRoutes)
 app.use('/api/v1/carts/', cartRoutes)
 app.use('/api/v1/admin/', adminRoutes)
