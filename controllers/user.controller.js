@@ -1,5 +1,18 @@
-const getAllUsers = async (req, res) => {
-    
+import User from '../models/user.model.js'
+
+const getAllUsers = async (req, res, next) => {
+    try {
+        const users = await User.find()
+        res.status(200).json({
+            success: true,
+            message: "All the users were found",
+            data: {
+                users
+            }
+        })
+    } catch (error) {
+        next(error)
+    }
 }
 
 const getParticularUser = async (req, res) => {
