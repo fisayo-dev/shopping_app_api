@@ -5,6 +5,7 @@ import userRoutes from './routes/user.routes.js'
 import cartRoutes from './routes/cart.routes.js'
 import adminRoutes from './routes/admin.routes.js'
 import connectToDatabase from './database/mongodb.js'
+import errMiddleware from './middlewares/error.middleware.js'
 
 const app = express()
 
@@ -15,6 +16,8 @@ app.use('/api/v1/auth/', authRoutes)
 app.use('/api/v1/users/', userRoutes)
 app.use('/api/v1/carts/', cartRoutes)
 app.use('/api/v1/admin/', adminRoutes)
+
+app.use(errMiddleware)
 
 // Listen to port
 app.listen(config.env.port, async() => {
