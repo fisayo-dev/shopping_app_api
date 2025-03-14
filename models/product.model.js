@@ -23,12 +23,17 @@ const productSchema = new mongoose.Schema({
         min: [0, 'Price must be greater than zero']
     },
     height: {
-        type: "String",
+        type: String,
         required: [true, 'A height is required']
     },
     width: {
-        type: "String",
+        type: String,
         required: [true, 'A width is required']
+    },
+    currency: {
+        type: String,
+        enum: ['USD', 'NGN', 'GBP', 'EUR'],
+        default: 'NGN'
     },
     size: {
         type: "String",
