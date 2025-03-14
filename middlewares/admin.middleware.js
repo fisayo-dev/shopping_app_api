@@ -4,7 +4,7 @@ import Admin from '../models/admin.models.js'
 
 const adminMiddleware = async (req, res, next) => {
     try {
-        // Perform next function if admin id form token exist in admin database
+        // Perform next function if admin id from token exist in admin database
         let token
 
         if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) { 
