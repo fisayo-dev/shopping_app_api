@@ -19,7 +19,7 @@ const getParticularUser = async (req, res, next) => {
     const { id } = req.params
     try {
         const user = await User.findById(id).select('-password')
-        if (req.user._id !== id) {
+        if (req.user._id != id) {
             const error = new Error("You can't access someone else' details")
             error.statusCode = 401
             throw error
