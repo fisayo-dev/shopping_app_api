@@ -1,4 +1,5 @@
 import express from 'express'
+import cookieParser from 'cookie-parser'
 import config from './config/index.js'
 import authRoutes from './routes/auth.routes.js'
 import userRoutes from './routes/user.routes.js'
@@ -11,12 +12,15 @@ const app = express()
 
 // JSON middleware
 app.use(express.json())
+app.use(express.urlencoded({ extended: false }))
+app.use(cookieParser())
 
 app.use('/api/v1/auth/', authRoutes)
 app.use('/api/v1/users/', userRoutes)
 app.use('/api/v1/carts/', cartRoutes)
 app.use('/api/v1/admin/', adminRoutes)
 
+// Err Middleware 
 app.use(errMiddleware)
 
 // Listen to port
