@@ -67,7 +67,7 @@ const updateProduct = async (req, res, next) => {
             throw error
         }
 
-        await Product.findByIdAndUpdate(id, { ...req.body })
+        await productExist.updateOne({ ...req.body })
         const updatedProduct = await Product.findById(id)
         res.status(200).json({
             success: true,
