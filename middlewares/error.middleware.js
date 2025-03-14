@@ -1,8 +1,8 @@
-const errMiddleware = (err, res, req, next) => {
+const errMiddleware = (err, req, res, next) => {
     try {
         let error = { ...err }
         error.message = err.message
-        console.error(error)
+        console.error(err)
 
         // Mongoose bad objectId
         if (err.name === 'CastError') {
@@ -20,12 +20,12 @@ const errMiddleware = (err, res, req, next) => {
 
         // Mongoose validation error
         if (err.name == 'ValidationError') {
-            const message = Object.values(err.errors).map((value) => val.message)
+            const message = Object.values(err.errors).map(value => value.message)
             error = new Error(message.join(', '))
             error.statusCode = 404
         }
 
-        res.status(err.statusCode || 500).json({success: false, error: error.message || 'Server Error'})
+        res.status(error.statusCode || 500).json({ success: false, error: error.message || 'Server Error' })
     } catch (error) {
         next(error)
     }

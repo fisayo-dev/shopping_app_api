@@ -16,14 +16,15 @@ export const signupUser = async (req, res, next) => {
         // Check if suer exist
         const existingUser = await User.findOne({ email })
         if (existingUser) {
-            const error = new Error('User already exists')
-            error.statusCode = 409;
-            throw error
+            res.status(400).json({
+                success: false,
+                message: 'Oops, the user alreasy exist'
+            })
         }
 
         // Hash password
-        const salt = bcrypt.genSalt(10)
-        const hashedPassword = bcrypt.hash(password, salt)
+        const salt = await bcrypt.genSalt(10)
+        const hashedPassword = await bcrypt.hash(password, salt)
 
         // Create new user into database
         const newUsers = await User.create([{
@@ -35,6 +36,8 @@ export const signupUser = async (req, res, next) => {
 
         await session.commitTransaction();
         session.endSession();
+
+
         res.status(201).json({
             success: true,
             message: 'User created succesfully',
@@ -49,27 +52,6 @@ export const signupUser = async (req, res, next) => {
         session.endSession();
         next(error)
     }
-    // const { email, fullName, password, gender, telephone, dateOfBirth, country } = req.body
-    
-    // if (!email || !fullName || !password || !gender || !telephone || !dateOfBirth || !country) return res.status(400).json({ message: 'Ensure all field are provided with data' })
-    
-    // const hashedPassword = bcrypt.hashSync(password, 10)
-
-    // try {
-        
-    //     const newUser = new User({
-    //         email, fullName, hashedPassword, gender, telephone, dateOfBirth, country
-    //     })
-        
-    //     const createdUser = await newUser.save()
-        
-    //     res.status(201).send({
-    //         message: 'Your account has been successfully created',
-    //         userId: createdUser._id
-    //     })
-    // } catch (err) {
-    //     res.status(500).json({ message: 'Error occurred when trying to create user', error: err.message })
-    // }
 }
 
 export const signinUser = async (req, res) => {
