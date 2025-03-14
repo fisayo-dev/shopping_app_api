@@ -21,9 +21,9 @@ const getParticularUser = async (req, res, next) => {
         const user = await User.findById(id).select('-password')
         res.status(200).json({
             success: true,
-            message: "Got the user you are looking for",
+            message: "Got your details",
             data: {
-                user
+                user,
             }
         })
     } catch (error) {
