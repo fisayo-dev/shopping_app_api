@@ -29,7 +29,7 @@ const userSchema = new mongoose.Schema({
     },
     country: {
         type: String,
-        required: true,
+        required: [true, 'Country is required'],
         lowercase: true,
     },
 }, { timestamps: true })
