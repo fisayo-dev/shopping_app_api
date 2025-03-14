@@ -4,16 +4,16 @@ import Product from '../models/product.model.js'
 const getAllItemsInCart = async (req, res, next) => {
     try {
 
-        const { userId } = req.params;
+        const { user_id } = req.params;
         
-        if (req.user._id != userId) {
+        if (req.user._id != user_id) {
             const error = new Error("Sorry, but you can't access someone else's cart")
             error.statusCode = 401
             throw error
         }
         
         // Fetch items in cart
-        const cartItems = await Cart.find({ owner: userId })
+        const cartItems = await Cart.find({ owner: user_id })
         
         // Fetch productItems from cart
         let productItems = []
@@ -26,7 +26,7 @@ const getAllItemsInCart = async (req, res, next) => {
             success: true,
             message: 'Fetched all items in cart',
             data: {
-                ...cartItems,
+                cart: [...cartItems],
                 productInCart: productItems
             }
         })
@@ -63,4 +63,4 @@ const deleteItemFromCart = async (req, res) => {
 }
 
 
-export { deleteItemFromCart, updateItemInCart, addItemToCart, getAllItemsInCart,  }
+export { deleteItemFromCart, updateItemInCart, addItemToCart, getAllItemsInCart  }
