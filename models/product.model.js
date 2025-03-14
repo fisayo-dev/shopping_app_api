@@ -37,10 +37,7 @@ const productSchema = new mongoose.Schema({
     },
     quantity: {
         type: Number,
-        default: 1,
-        validate: {
-            validator: (value) => value = 0, message: 'Product cannot have zero quantity'
-        }
+        default: 1, 
     },
     status: {
         type: String,
