@@ -82,7 +82,23 @@ const updateProduct = async (req, res, next) => {
 
 }
 
-const deleteProduct = async () => {
+const deleteProduct = async (req, res, next) => {
+    try {
+        const { id } = req.params
+        // Check if product exist
+        const productExist = await Product.findByIdAndDelete(id)
+        if (!productExist) {
+            const error = new Error('Oops, product does not exist')
+            error.statusCode = 404
+            throw error
+        }
+        res.status(200).json({
+            success: true,
+            message: "Your product has been successfully deleted"
+        })
+    } catch (error) {
+        next(error)
+    } 
 
 }
 
