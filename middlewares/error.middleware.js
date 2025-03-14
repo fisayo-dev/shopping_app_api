@@ -4,7 +4,7 @@ const errMiddleware = (err, res, req, next) => {
         error.message = err.message
         console.error(error)
 
-        // Mongoose bag objectId
+        // Mongoose bad objectId
         if (err.name === 'CastError') {
             const message = 'Resource not found';
             error = new Error(message)
