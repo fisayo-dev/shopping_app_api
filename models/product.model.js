@@ -35,10 +35,6 @@ const productSchema = new mongoose.Schema({
         enum: ['USD', 'NGN', 'GBP', 'EUR'],
         default: 'NGN'
     },
-    size: {
-        type: "String",
-        required: [true, 'A size is required']
-    },
     quantity: {
         type: Number,
         default: 1,
