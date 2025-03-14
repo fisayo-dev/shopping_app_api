@@ -1,10 +1,10 @@
 import express from 'express'
-import mongoose from 'mongoose'
 import config from './config/index.js'
 import authRouter from './routes/auth.routes.js'
 import userRoutes from './routes/user.routes.js'
 import cartRoutes from './routes/cart.routes.js'
 import adminRoutes from './routes/admin.routes.js'
+import connectToDatabase from './database/mongodb.js'
 
 const app = express()
 
@@ -17,11 +17,9 @@ app.use('/api/v1/carts/', cartRoutes)
 app.use('/api/v1/admin/', adminRoutes)
 
 // Listen to port
-app.listen(config.env.port, () => {
-    mongoose.connect(config.env.mongodbUrl)
-    .then(() => console.log('MongoDB connected'))
-    .catch((err) => console.log(err))
-console.log(`Server running on port ${config.env.port}`)
+app.listen(config.env.port, async() => {
+    console.log(`Server running on port ${config.env.port}`)
+    await connectToDatabase()
 })
 
 export default app
