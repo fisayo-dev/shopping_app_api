@@ -60,14 +60,12 @@ const createProduct = async (req, res, next) => {
 const updateProduct = async (req, res, next) => {
     try {
         const { id } = req.params
-        const productExist = await Product.findById(id)
+        const productExist = await Product.findByIdAndUpdate(id, { ...req.body })
         if (!productExist) {
             const error = new Error('Oops, product does not exist')
             error.statusCode = 404
             throw error
         }
-
-        await productExist.updateOne({ ...req.body })
         const updatedProduct = await Product.findById(id)
         res.status(200).json({
             success: true,
