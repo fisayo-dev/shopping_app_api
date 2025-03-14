@@ -27,7 +27,7 @@ const getAllItemsInCart = async (req, res, next) => {
             message: 'Fetched all items in cart',
             data: {
                 cart: [...cartItems],
-                productInCart: productItems
+                productsInCart: productItems
             }
         })
     } catch (error) {
