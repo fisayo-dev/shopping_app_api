@@ -18,8 +18,6 @@ const authorize = async (req, res, next) => {
 
         if (!user) return res.status(401).json({ message: 'Unathorized' })
         
-        req.user = user;
-
         next()
 
     } catch (error) {
