@@ -1,7 +1,19 @@
 import Product from "../models/product.model.js"
 
-const getAllProducts = async () => {
+const getAllProducts = async (req, res, next) => {
+    try {
+        const products = await Product.find()
+        res.status(200).json({
+            success: true,
+            message: 'Got all products',
+            data: {
+                products
+            }
+        })
 
+    } catch (error) {
+        next(error)
+    }
 }
 
 const getParticularProduct = async (req, res, next) => {
