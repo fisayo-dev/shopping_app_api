@@ -7,7 +7,7 @@ router.get('/', getAllProducts)
 router.get('/:id', getParticularProduct)
 router.post("/", adminMiddleware, createProduct)
 router.put("/:id/", adminMiddleware, updateProduct)
-router.delete("/:id/", deleteProduct)
+router.delete("/:id/", adminMiddleware, deleteProduct)
 
 
 
