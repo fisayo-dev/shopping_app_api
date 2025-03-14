@@ -1,5 +1,6 @@
 import express from 'express'
 import cookieParser from 'cookie-parser'
+
 import config from './config/index.js'
 import authRoutes from './routes/auth.routes.js'
 import userRoutes from './routes/user.routes.js'
@@ -23,7 +24,7 @@ app.use('/api/v1/carts/', cartRoutes)
 app.use('/api/v1/admin/', adminRoutes)
 app.use('/api/v1/products/', productRoutes)
 
-// Err Middleware 
+// Error Middleware 
 app.use(errMiddleware)
 
 // Listen to port

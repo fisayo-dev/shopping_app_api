@@ -46,4 +46,7 @@ const productSchema = new mongoose.Schema({
         enum: ['IN-STOCK', 'OUT-OF-STOCK'],
         default: 'IN-STOCK'        
     }
-}, {timestamps: true})
+}, { timestamps: true })
+
+const productModel = mongoose.model('Product', productSchema)
+export default productModel
