@@ -4,8 +4,27 @@ const getAllProducts = async () => {
 
 }
 
-const getParticularProduct = async () => {
+const getParticularProduct = async (req, res, next) => {
+    const { id } = req.params;
+    try {
+        const productExist = await Product.findById(id)
+        if (!productExist) {
+            const error = new Error('Oops, product does not exist')
+            error.statusCode = 404
+            throw error
+        }
+        
+        res.status(200).json({
+            success: true,
+            message: 'Got the product your are looking for',
+            data: {
+                product: productExist
+            }
+        })
 
+    } catch (error) {
+        next(error)
+    }
 }
 
 const createProduct = async (req, res, next) => {
