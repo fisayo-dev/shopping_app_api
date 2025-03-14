@@ -1,6 +1,18 @@
 import Cart from '../models/cart.model.js'
 import Product from '../models/product.model.js'
 
+const fetchAllProductItemsFromCart = async (cart) => {
+    // Fetch productItems from cart
+    const carts = [...cart]
+    let productItems;
+    carts.forEach( async (item) => {
+        const product = await Product.findById(item.productId)
+        productItems.push(product)
+    })
+    console.log(productItems)
+    return productItems;
+}
+
 const getAllItemsInCart = async (req, res, next) => {
     try {
 
@@ -15,19 +27,15 @@ const getAllItemsInCart = async (req, res, next) => {
         // Fetch items in cart
         const cartItems = await Cart.find({ owner: user_id })
         
-        // Fetch productItems from cart
-        let productItems = []
-        cartItems.map(async (item) => {
-            const product = await Product.findById(item.productId)
-            productItems.push(product)
-         })
+
+        const productsInCart =  await fetchAllProductItemsFromCart(cartItems)
     
         res.status(200).json({
             success: true,
             message: 'Fetched all items in cart',
             data: {
                 cart: [...cartItems],
-                productsInCart: productItems
+                productsInCart
             }
         })
     } catch (error) {
