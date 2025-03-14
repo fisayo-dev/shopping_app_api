@@ -3,43 +3,6 @@ import bcrypt from "bcryptjs"
 import jwt from 'jsonwebtoken'
 import config from "../config/index.js"
 
-const signinAdmin = async (req, res, next) => {
-    try {
-        const { email, password } = req.body
-        const admin = await Admin.findOne({ email })
-        if (!admin) {
-            const error = new Error('User not found')
-            error.statusCode = 404
-            throw error
-        }
-
-        const isPasswordValid = await bcrypt.compare(password, admin.password)
-        
-        if (!isPasswordValid) {
-            const error = new Error('Password is not valid')
-            error.statusCode = 401
-            throw error
-        }
-
-        const token = jwt.sign({ adminId: admin._id }, config.env.jwt.secret, { expiresIn: config.env.jwt.expiresIn })
-
-        res.status(200).json({
-            success: true,
-            message: 'Admin signed in successfully',
-            data: {
-                token,
-                admin
-            }
-        })
-    } catch (error) {
-        next(error)
-    }
-}
-
-const signoutAdmin = async (req, res) => {
-    
-}
-
 const signupAdmin = async (req, res, next) => {
     try {
         
@@ -77,5 +40,44 @@ const signupAdmin = async (req, res, next) => {
         next(error)
     }
 }
+
+const signinAdmin = async (req, res, next) => {
+    try {
+        const { email, password } = req.body
+        const admin = await Admin.findOne({ email })
+        if (!admin) {
+            const error = new Error('User not found')
+            error.statusCode = 404
+            throw error
+        }
+
+        const isPasswordValid = await bcrypt.compare(password, admin.password)
+        
+        if (!isPasswordValid) {
+            const error = new Error('Password is not valid')
+            error.statusCode = 401
+            throw error
+        }
+
+        const token = jwt.sign({ adminId: admin._id }, config.env.jwt.secret, { expiresIn: config.env.jwt.expiresIn })
+
+        res.status(200).json({
+            success: true,
+            message: 'Admin signed in successfully',
+            data: {
+                token,
+                admin
+            }
+        })
+    } catch (error) {
+        next(error)
+    }
+}
+
+const signoutAdmin = async (req, res) => {
+    
+}
+
+
 
 export { signinAdmin, signoutAdmin, signupAdmin }
