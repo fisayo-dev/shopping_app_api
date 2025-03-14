@@ -1,7 +1,7 @@
 import User from "../models/user.model.js"
 import bcrypt from "bcryptjs"
 
-const signupUser = async (req, res) => {
+export const signupUser = async (req, res) => {
     const { email, fullName, password, gender, telephone, dateOfBirth, country } = req.body
     
     if (!email || !fullName || !password || !gender || !telephone || !dateOfBirth || !country) return res.status(400).json({ message: 'Ensure all field are provided with data' })
@@ -25,13 +25,10 @@ const signupUser = async (req, res) => {
     }
 }
 
-const signinUser = async (req, res) => {
+export const signinUser = async (req, res) => {
     
 }
 
-const signoutUser = async (req, res) => {
+export const signoutUser = async (req, res) => {
     
 }
-
-
-export {signupUser,signoutUser, signinUser}
