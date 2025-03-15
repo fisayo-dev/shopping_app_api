@@ -62,8 +62,27 @@ const updateItemInCart = async (req, res) => {
     // Implementation pending
 };
 
-const deleteItemFromCart = async (req, res) => {
-    // Implementation pending
+const deleteItemFromCart = async (req, res, next) => {
+    try {
+        // Get user id from req.user
+        const userId = req.user._id;
+        const { id } = req.params;
+        const cartItem = await Cart.findOne({ productId: id, owner: userId });
+
+        if (cartItem === null) {
+            const error = new Error("Item not found in cart");
+            error.statusCode = 404;
+            throw error;
+        }
+
+        await cartItem.deleteOne();
+        res.status(200).json({
+            success: true,
+            message: 'Item removed from cart'
+        });
+    } catch (error) {
+        next(error);
+    }
 };
 
 
