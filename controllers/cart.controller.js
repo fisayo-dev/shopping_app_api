@@ -53,7 +53,25 @@ const addItemToCart = async (req, res, next) => {
 };
 
 const updateItemInCart = async (req, res) => {
-    // Implementation pending
+    const { newQuantity } = req.body;
+    const { id } = req.params;
+
+    const newparams = { amount: newQuantity };
+
+    const itemExistInCart = await Cart.findOne({ productId: id, owner: req.user._id });
+
+    if(!itemExistInCart) {
+        res.status(404).json({
+            success: false,
+            message: 'Item not found in cart'
+        });
+    }
+
+    await itemExistInCart.updateOne(newparams);
+    res.status(200).json({
+        success: true,
+        message: 'Item updated successfully'
+    });
 };
 
 const deleteItemFromCart = async (req, res, next) => {
