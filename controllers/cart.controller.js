@@ -36,12 +36,7 @@ const getAllItemsInCart = async (req, res, next) => {
 
 const addItemToCart = async (req, res, next) => {
     try {
-        if (req.user._id != req.body.owner) {
-            const error = new Error("Sorry, but you can't add to someone else's cart");
-            error.statusCode = 401;
-            throw error;
-        }
-        const newCartItem = await Cart.create([{ ...req.body }]);
+        const newCartItem = await Cart.create([{ ...req.body, owner: req.user._id }]);
 
         res.status(201).json({
             success: true,
