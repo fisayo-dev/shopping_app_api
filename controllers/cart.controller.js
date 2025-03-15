@@ -5,10 +5,11 @@ const fetchAllProductItemsFromCart = async (cart) => {
     // Fetch productItems from cart using map and Promise.all
     const productItems = await Promise.all(
         cart.map(async (item) => {
-            return await Product.findById(item.productId);
+            const product = await Product.findById(item.productId);
+            return product ? {...product.toObject(), amount: item.amount} : null;
         })
     );
-    return productItems;
+    return productItems.filter(item => item !== null);
 };
 
 const getAllItemsInCart = async (req, res, next) => {
@@ -25,7 +26,7 @@ const getAllItemsInCart = async (req, res, next) => {
             success: true,
             message: 'Fetched all items in cart',
             data: {
-                cart: productsInCart
+                cart: productsInCart,
             }
         });
     } catch (error) {
