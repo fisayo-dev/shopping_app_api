@@ -80,8 +80,17 @@ const deleteItemFromCart = async (req, res, next) => {
 };
 
 
-const deleteAllItemsFromCart = async (req, res) => { 
-
+const deleteAllItemsFromCart = async (req, res, next) => { 
+    try {
+        const userId = req.user._id;
+        await Cart.deleteMany({ owner: userId });
+        res.status(200).json({
+            success: true,
+            message: 'All items removed from cart'
+        });
+    } catch (error) {
+        next(error);
+    }
 }
 
 export { deleteItemFromCart, updateItemInCart, addItemToCart, getAllItemsInCart, deleteAllItemsFromCart };
