@@ -13,13 +13,7 @@ const fetchAllProductItemsFromCart = async (cart) => {
 
 const getAllItemsInCart = async (req, res, next) => {
     try {
-        const { user_id } = req.params;
-
-        if (req.user._id != user_id) {
-            const error = new Error("Sorry, but you can't access someone else's cart");
-            error.statusCode = 401;
-            throw error;
-        }
+        const user_id = req.user._id
 
         // Fetch items in cart
         const cartItems = await Cart.find({ owner: user_id });
