@@ -66,4 +66,9 @@ const deleteItemFromCart = async (req, res) => {
     // Implementation pending
 };
 
-export { deleteItemFromCart, updateItemInCart, addItemToCart, getAllItemsInCart };
+
+const deleteAllItemsFromCart = async (req, res) => { 
+
+}
+
+export { deleteItemFromCart, updateItemInCart, addItemToCart, getAllItemsInCart, deleteAllItemsFromCart };
