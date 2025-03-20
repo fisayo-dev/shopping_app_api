@@ -27,7 +27,7 @@ export const getAllItemsInCart = async (req, res, next) => {
             message: 'Fetched all items in cart',
             data: {
                 length: productsInCart.length > 0 ? productsInCart.length : 'You have nothing in your cart!',
-                cart: productsInCart,
+                cart: productsInCart.sort((a,b) => b.createdAt - a.createdAt)
             }
         });
     } catch (error) {
