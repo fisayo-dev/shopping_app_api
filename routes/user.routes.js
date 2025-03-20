@@ -8,7 +8,7 @@ const router = Router()
 
 router.get('/', adminMiddleware, getAllUsers)
 router.get('/:id', authorize, getParticularUser)
-router.put('/:id', updateUser)
+router.put('/:id', authorize, updateUser)
 router.delete("/:id", authorize, deleteUser)
 
 export default router

@@ -37,9 +37,25 @@ export const getParticularUser = async (req, res, next) => {
     }
 }
 
-export const updateUser = async (req, res) => {
+export const updateUser = async (req, res, next) => {
+    const userExist = await User.findByIdAndUpdate(req.params.id, { ...req.body })
+    if (!userExist)  {
+        const error = new Error("The user doesn't exist")
+        error.statusCode = 404
+        next(error)
+    }
 
+    const updatedUser = await User.findById(req.params.id)
+
+    res.status(200).json({
+        success: true,
+        message: 'Your account has been successfully updated',
+        data: {
+            user: updatedUser
+        }
+    })
 }
+
 export const deleteUser = async (req, res, next) => {
     try {
         const { id } = req.params
