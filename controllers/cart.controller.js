@@ -1,7 +1,7 @@
 import Cart from '../models/cart.model.js';
 import Product from '../models/product.model.js';
 
-const fetchAllProductItemsFromCart = async (cart) => {
+export const fetchAllProductItemsFromCart = async (cart) => {
     // Fetch productItems from cart using map and Promise.all
     const productItems = await Promise.all(
         cart.map(async (item) => {
@@ -12,7 +12,7 @@ const fetchAllProductItemsFromCart = async (cart) => {
     return productItems.filter(item => item !== null);
 };
 
-const getAllItemsInCart = async (req, res, next) => {
+export const getAllItemsInCart = async (req, res, next) => {
     try {
         const user_id = req.user._id
 
@@ -34,7 +34,7 @@ const getAllItemsInCart = async (req, res, next) => {
     }
 };
 
-const addItemToCart = async (req, res, next) => {
+export const addItemToCart = async (req, res, next) => {
     try {
         const newCartItem = await Cart.create([{ ...req.body, owner: req.user._id }]);
 
@@ -48,7 +48,7 @@ const addItemToCart = async (req, res, next) => {
     }
 };
 
-const updateItemInCart = async (req, res) => {
+export const updateItemInCart = async (req, res) => {
     const { newQuantity } = req.body;
     const { id } = req.params;
 
@@ -70,7 +70,7 @@ const updateItemInCart = async (req, res) => {
     });
 };
 
-const deleteItemFromCart = async (req, res, next) => {
+export const deleteItemFromCart = async (req, res, next) => {
     try {
         // Get user id from req.user
         const userId = req.user._id;
@@ -94,7 +94,7 @@ const deleteItemFromCart = async (req, res, next) => {
 };
 
 
-const deleteAllItemsFromCart = async (req, res, next) => { 
+export const deleteAllItemsFromCart = async (req, res, next) => { 
     try {
         const userId = req.user._id;
         await Cart.deleteMany({ owner: userId });
@@ -106,5 +106,3 @@ const deleteAllItemsFromCart = async (req, res, next) => {
         next(error);
     }
 }
-
-export { deleteItemFromCart, updateItemInCart, addItemToCart, getAllItemsInCart, deleteAllItemsFromCart };
