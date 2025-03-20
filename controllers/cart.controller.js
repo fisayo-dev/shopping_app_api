@@ -26,6 +26,7 @@ export const getAllItemsInCart = async (req, res, next) => {
             success: true,
             message: 'Fetched all items in cart',
             data: {
+                length: productsInCart.length > 0 ? productsInCart.length : 'You have nothing in your cart!',
                 cart: productsInCart,
             }
         });
