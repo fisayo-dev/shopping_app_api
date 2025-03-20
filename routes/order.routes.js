@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { makeOrders, getOrder, getOrders } from '../controllers/order.controller'
+import { makeOrders, getOrder, getOrders } from '../controllers/order.controller.js'
 import authorize from '../middlewares/auth.middleware'
 
 const router = Router()
