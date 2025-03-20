@@ -35,9 +35,7 @@ const getParticularUser = async (req, res, next) => {
         next(error)
     }
 }
-const createUser = async (req, res) => {
 
-}
 const updateUser = async (req, res) => {
 
 }

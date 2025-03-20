@@ -8,7 +8,6 @@ const router = Router()
 
 router.get('/', adminMiddleware, getAllUsers)
 router.get('/:id', authorize, getParticularUser)
-router.post('/', createUser)
 router.put('/:id', updateUser)
 router.delete("/:id", deleteUser)
 
