@@ -8,7 +8,7 @@ const getAllProducts = async (req, res, next) => {
             message: 'Got all products',
             data: {
                 length: products.length > 0 ? products.length : 'The product database is empty!',
-                products
+                products: products.sort((a,b) => b.createdAt - a.createdAt)
             }
         })
 
