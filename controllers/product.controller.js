@@ -1,6 +1,6 @@
 import Product from "../models/product.model.js"
 
-const getAllProducts = async (req, res, next) => {
+export const getAllProducts = async (req, res, next) => {
     try {
         const products = await Product.find()
         res.status(200).json({
@@ -17,7 +17,7 @@ const getAllProducts = async (req, res, next) => {
     }
 }
 
-const getParticularProduct = async (req, res, next) => {
+export const getParticularProduct = async (req, res, next) => {
     const { id } = req.params;
     try {
         const productExist = await Product.findById(id)
@@ -40,7 +40,7 @@ const getParticularProduct = async (req, res, next) => {
     }
 }
 
-const createProduct = async (req, res, next) => {
+export const createProduct = async (req, res, next) => {
     try {
         // Create product
         const newProduct = await Product.create([{
@@ -58,7 +58,7 @@ const createProduct = async (req, res, next) => {
     }
 }
 
-const updateProduct = async (req, res, next) => {
+export const updateProduct = async (req, res, next) => {
     try {
         const { id } = req.params
         const productExist = await Product.findByIdAndUpdate(id, { ...req.body })
@@ -81,7 +81,7 @@ const updateProduct = async (req, res, next) => {
 
 }
 
-const deleteProduct = async (req, res, next) => {
+export const deleteProduct = async (req, res, next) => {
     try {
         const { id } = req.params
         // Check if product exist
@@ -100,6 +100,3 @@ const deleteProduct = async (req, res, next) => {
     } 
 
 }
-
-export { createProduct, deleteProduct, updateProduct, getAllProducts, getParticularProduct }
-
