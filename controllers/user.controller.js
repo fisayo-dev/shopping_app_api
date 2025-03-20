@@ -1,6 +1,6 @@
 import User from '../models/user.model.js'
 
-const getAllUsers = async (req, res, next) => {
+export const getAllUsers = async (req, res, next) => {
     try {
         const users = await User.find().select('-password')
         res.status(200).json({
@@ -15,7 +15,7 @@ const getAllUsers = async (req, res, next) => {
     }
 }
 
-const getParticularUser = async (req, res, next) => {
+export const getParticularUser = async (req, res, next) => {
     const { id } = req.params
     try {
         const user = await User.findById(id).select('-password')
@@ -36,11 +36,9 @@ const getParticularUser = async (req, res, next) => {
     }
 }
 
-const updateUser = async (req, res) => {
+export const updateUser = async (req, res) => {
 
 }
-const deleteUser = async (req, res) => {
+export const deleteUser = async (req, res) => {
 
 }
-
-export {createUser, getAllUsers, getParticularUser, updateUser, deleteUser}
