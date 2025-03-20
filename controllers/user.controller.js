@@ -1,3 +1,4 @@
+import Cart from '../models/cart.model.js'
 import User from '../models/user.model.js'
 
 export const getAllUsers = async (req, res, next) => {
@@ -39,6 +40,28 @@ export const getParticularUser = async (req, res, next) => {
 export const updateUser = async (req, res) => {
 
 }
-export const deleteUser = async (req, res) => {
+export const deleteUser = async (req, res, next) => {
+    try {
+        const { id } = req.params
+        // Check if user exist
+        const userExist = await User.findByIdAndDelete(id)
+
+        if (!userExist) {
+            const error = new Error("The user doesn't exist")
+            error.statusCode = 404
+            next(error)
+        }
+
+        // Find all cart items with user as delete them
+        await Cart.deleteMany({ owner: id })
+
+        res.status(200).json({
+            success: true,
+            message: "Successfuly deleted your account",
+        })
+
+    } catch (error) {
+        next(error)
+    }
 
 }
