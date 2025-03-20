@@ -7,8 +7,8 @@ const getAllProducts = async (req, res, next) => {
             success: true,
             message: 'Got all products',
             data: {
-                products,
-                length: products.length > 0 ? products.length : 'The product database is empty!'
+                length: products.length > 0 ? products.length : 'The product database is empty!',
+                products
             }
         })
 
