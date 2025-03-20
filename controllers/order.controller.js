@@ -18,13 +18,12 @@ export const makeOrders = async (req, res, next) => {
     const productItems = await Promise.all(
         productsIds.map(async (id) => {
             const product = await Product.findById(id);
-            const productInCart = await Cart.find({ owner: req.user._id, productId: id })
-            return product ? {...product.toObject(), amount: productInCart.amount} : null;
+            const productInCart = await Cart.findOne({ owner: req.user._id, productId: id })
+            return product ? {...product.toObject(), amount: (productInCart.amount * product.price)} : null;
         })
     );
 
     const totalPrice = productItems.reduce((a, b) => a.amount + b.amount)
-    
     
     // Populate order schema
     await Order.create({
