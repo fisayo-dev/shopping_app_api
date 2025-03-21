@@ -2,6 +2,7 @@ import User from "../models/user.model.js"
 import bcrypt from "bcryptjs"
 import jwt from 'jsonwebtoken'
 import config from "../config/index.js"
+import sendEmail from "../utils/send-email.js"
 
 export const signupUser = async (req, res, next) => { 
     try {
@@ -28,7 +29,15 @@ export const signupUser = async (req, res, next) => {
         // Generate token for user
         const token = jwt.sign({ userId: newUsers[0]._id }, config.env.jwt.secret, { expiresIn: config.env.jwt.expiresIn })
 
-        // Retun success response
+        // Send email to user
+        sendEmail({
+            from: config.env.nodemailer.user,
+            to: email,
+            subject: '🚀 Welcome to ShopHub',
+            text: `Hi ${name}, Welcome to ShopHub. We are excited to have you here.`
+        })
+
+        // Return success response
         res.status(201).json({
             success: true,
             message: 'User created succesfully',
