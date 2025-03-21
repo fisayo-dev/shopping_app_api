@@ -11,7 +11,7 @@ const orderSchema = new mongoose.Schema({
         required: [true, 'You did not specify the price of the order!']
     },
     owner: {
-        type: [mongoose.Types.ObjectId],
+        type: mongoose.Types.ObjectId,
         ref: 'User',
         required: [true, 'You did not specify the owner of this order!']
     }
