@@ -8,6 +8,10 @@ const config = {
         jwt: {
             secret: process.env.JWT_SECRET,
             expiresIn: process.env.JWT_EXPIRES_IN
+        },
+        nodemailer: {
+            app_password: process.env.APP_PASSWORD,
+            user: process.env.USER
         }
     }
 }
