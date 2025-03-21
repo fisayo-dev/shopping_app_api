@@ -10,7 +10,7 @@ export const makeOrders = async (req, res, next) => {
     if (!cartItemsToOrdered) { 
         const error = new Error("Sorry but there is nothing in your cart to order")
         error.statusCode = 404
-        next(error)
+        throw error
     }
     
     // Get all the id(s) of products ordered by the user
@@ -53,7 +53,7 @@ export const getOrders = async (req, res, next) => {
     if (!orders) {
         const error = new Error("Seems like you haven't ordered anything yet")
         error.statusCode = 404
-        next(error)
+        throw error
     }
 
     // Get total order price
