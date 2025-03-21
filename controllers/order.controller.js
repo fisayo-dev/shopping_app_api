@@ -47,7 +47,41 @@ export const makeOrders = async (req, res, next) => {
 export const getOrders = async (req, res, next) => {
     // Get orders
 
-    const orders = await Order.find({})
+    const orders = await Order.find({ owner: req.user._id })
+    if (!orders) {
+        const error = new Error("Seems like you haven't ordered anything yet")
+        error.statusCode = 404
+        next(error)
+    }
+
+    // Get total order price
+    const totalOrderPrice = orders.length > 1 ? orders.reduce((a, b) => a.totalPrice + b.totalPrice) : orders[0].totalPrice
+
+    // Get products ordered and their quantity
+    const orderProductIds = []
+    orders.map((order) => {
+        const ids = order.productsOrdered
+        ids.map(prodId => orderProductIds.push(prodId))
+    })
+    
+    const totalOrderProducts = await Promise.all(
+        orderProductIds.map(async (prodId) => {
+            const product = await Product.findById(prodId);
+            const productInCart = await Cart.findOne({ productId: prodId });
+            return product ? {...product.toObject(), totalPrice: productInCart.amount * product.price} : null;
+        })
+    );
+    totalOrderProducts.filter(item => item !== null);
+    
+    res.status(200).json({
+        success: true,
+        message: 'Successfully got your orders',
+        data: {
+            totalOrderPrice,
+            totalOrderQuantity: totalOrderProducts.length,
+            orders: totalOrderProducts
+        }
+    })
 }
 
 export const getOrder = async (req, res, next) => {
