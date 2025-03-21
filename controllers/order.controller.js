@@ -28,7 +28,8 @@ export const makeOrders = async (req, res, next) => {
     // Populate order schema
     await Order.create({
         productsOrdered: productsIds,
-        totalPrice
+        totalPrice,
+        owner: req.user._id
     })
 
     res.status(201).json({
@@ -44,7 +45,9 @@ export const makeOrders = async (req, res, next) => {
 }
 
 export const getOrders = async (req, res, next) => {
-    
+    // Get orders
+
+    const orders = await Order.find({})
 }
 
 export const getOrder = async (req, res, next) => {
