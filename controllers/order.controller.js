@@ -23,7 +23,7 @@ export const makeOrders = async (req, res, next) => {
         })
     );
 
-    const totalPrice = productItems.reduce((a, b) => a.amount + b.amount)
+    const totalPrice = productItems.length > 1 ? productItems.reduce((a, b) => a.amount + b.amount): productItems[0].amount
     
     // Populate order schema
     await Order.create({
