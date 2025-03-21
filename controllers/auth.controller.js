@@ -1,7 +1,7 @@
 import User from "../models/user.model.js"
 import bcrypt from "bcryptjs"
 import jwt from 'jsonwebtoken'
-import config from "../config/index.js"
+import config from "../config/env.js"
 import sendEmail from "../utils/send-email.js"
 
 export const signupUser = async (req, res, next) => { 
