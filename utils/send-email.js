@@ -1,4 +1,4 @@
-import transporter from "../config/nodemailer"
+import transporter from "../config/nodemailer.js"
 
 const sendEmail = async (mailOptions) => { 
     transporter.sendMail(mailOptions, (error, info) => {
