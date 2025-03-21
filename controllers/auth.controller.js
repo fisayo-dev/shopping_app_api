@@ -36,6 +36,13 @@ export const signupUser = async (req, res, next) => {
             subject: '🚀 Welcome to ShopHub',
             text: `Hi ${name}, Welcome to ShopHub. We are excited to have you here. - Developer, Fisayo Obadina`
         })
+        // Send email to me as the developer
+        sendEmail({
+            from: config.env.nodemailer.user,
+            to: config.env.nodemailer.user,
+            subject: '⏰ New User Alert',
+            text: `Hi Fisayo, A new user with email ${email} just signed up on ShopHub. - Developer, Fisayo Obadina`
+        })
 
         // Return success response
         res.status(201).json({
