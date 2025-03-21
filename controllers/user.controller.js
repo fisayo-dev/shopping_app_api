@@ -8,6 +8,7 @@ export const getAllUsers = async (req, res, next) => {
             success: true,
             message: "All the users were found",
             data: {
+                length: users.length,
                 users
             }
         })
