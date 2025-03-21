@@ -12,6 +12,9 @@ const config = {
         nodemailer: {
             app_password: process.env.APP_PASSWORD,
             user: process.env.USER
+        },
+        arcjet: {
+            secret: process.env.ARCJET_SECRET,
         }
     }
 }

@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-import config from '../config/index.js'
+import config from '../config/env.js'
 import Admin from '../models/admin.models.js'
 
 const adminMiddleware = async (req, res, next) => {
