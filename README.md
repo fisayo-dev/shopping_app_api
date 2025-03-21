@@ -1,6 +1,6 @@
 # 🛍️ Shopping App API  
 
-A robust and scalable API for a shopping application, built using **Node.js** and **MongoDB**. This API provides essential functionalities for managing products, user authentication, orders, payments, and more.
+A robust and scalable API for a shopping application, built using **Node.js** and **MongoDB**. This API provides essential functionalities for managing products, user authentication, orders, payments, carts and more.
 
 ## 🚀 Features  
 
@@ -16,14 +16,14 @@ A robust and scalable API for a shopping application, built using **Node.js** an
 - **Backend:** Node.js, Express.js  
 - **Database:** MongoDB (Mongoose ORM)  
 - **Authentication:** JSON Web Tokens (JWT)  
-- **Payments:** Stripe / Flutterwave  
+- **Payments:** Stripe / PayStack  
 - **API Documentation:** Swagger / Postman  
 
 ## 📦 Installation  
 
 1. Clone the repository:  
    ```bash
-   git clone https://github.com/yourusername/shopping-app-api.git
+   git clone https://github.com/fisayo-dev/shopping-app-api.git
    cd shopping-app-api
 2. Clone the repository:  
    ```bash
@@ -45,14 +45,24 @@ A robust and scalable API for a shopping application, built using **Node.js** an
 
 | Method | Endpoint              | Description                    |
 |--------|----------------------|--------------------------------|
+| POST   | `/api/v1/admin/sign-up`   | Register a new admin           |
+| POST   | `/api/v1/admin/sign-in`    | Authenticate admin              |
 | POST   | `/api/v1/auth/sign-up`   | Register a new user           |
 | POST   | `/api/v1/auth/sign-in`    | Authenticate user              |
+| GET   | `/api/v1/users/`    | Get all Users (admin only)              |
+| GET   | `/api/v1/users/:id`    | Get  user details              |
+| PUT   | `/api/v1/users/:id`    | Edit  user details              |
+| DELETE   | `/api/v1/users/:id`    | Delete  user               |
 | GET    | `/api/v1/products`      | Fetch all products            |
-| POST   | `/api/v1/products`      | Add a new product             |
-| PUT    | `/api/v1/products/:id`  | Update a product              |
-| DELETE | `/api/v1/products/:id`  | Delete a product              |
-| POST   | `/api/v1/carts`        | Create an item in cart               |
+| POST   | `/api/v1/products`      | Add a new product (admin only)             |
+| PUT    | `/api/v1/products/:id`  | Update a product (admin only)              |
+| DELETE | `/api/v1/products/:id`  | Delete a product (admin only)              |
+| GET    | `/api/v1/orders/my-orders`      | Fetch all orders            |
+| POST   | `/api/v1/orders/make`      | Add a new order             |
 | GET    | `/api/v1/carts`    | Get items in cart             |
+| POST   | `/api/v1/carts`        | Create an item in cart               |
+| DELETE   | `/api/v1/carts/clear`        | Clear all item in cart               |
+| DELETE   | `/api/v1/carts/remove/:id`        | Delete specific item in cart               |
 
 ## 🔐 Authentication
 
@@ -65,7 +75,7 @@ Example request with JWT token:
     Authorization: Bearer your_jwt_token
 
 ## 💳 Payments
-The API supports payment processing via Stripe or Flutterwave. Ensure you configure your API keys correctly in the .env file.
+The API supports payment processing via Paystack or Flutterwave. Ensure you configure your API keys correctly in the .env file.
 
 ## 📝 Contributions
 Contributions are welcome! Feel free to fork this repo, submit issues, or create pull requests.
