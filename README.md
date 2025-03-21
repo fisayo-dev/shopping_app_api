@@ -18,6 +18,7 @@ A robust and scalable API for a shopping application, built using **Node.js** an
 - **Authentication:** JSON Web Tokens (JWT)  
 - **Payments:** Stripe / PayStack  
 - **API Documentation:** Swagger / Postman  
+- **API Agent:** HTTPie / Any other alternative  
 
 ## 📦 Installation  
 
