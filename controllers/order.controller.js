@@ -1,3 +1,5 @@
+// Fix Order logic for not getting and making orders when cart items are more than 2
+
 import Cart from '../models/cart.model.js';
 import Product from '../models/product.model.js';
 import Order from '../models/order.model.js';
@@ -22,8 +24,8 @@ export const makeOrders = async (req, res, next) => {
             return product ? {...product.toObject(), amount: (productInCart.amount * product.price)} : null;
         })
     );
-
-    const totalPrice = productItems.length > 1 ? productItems.reduce((a, b) => a.amount + b.amount): productItems[0].amount
+    
+    const totalPrice = productItems.length > 1 ? productItems.reduce((a, b) => a.amount + b.amount) : productItems[0].amount
     
     // Populate order schema
     await Order.create({
@@ -68,7 +70,7 @@ export const getOrders = async (req, res, next) => {
         orderProductIds.map(async (prodId) => {
             const product = await Product.findById(prodId);
             const productInCart = await Cart.findOne({ productId: prodId });
-            return product ? {...product.toObject(), totalPrice: productInCart.amount * product.price} : null;
+            return product ? {...product.toObject(), quantity: productInCart.amount, totalPrice: productInCart.amount * product.price} : null;
         })
     );
     totalOrderProducts.filter(item => item !== null);
