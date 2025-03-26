@@ -1,3 +1,4 @@
+import { errorMonitor } from "nodemailer/lib/xoauth2/index.js"
 import Category from "../models/category.model.js"
 
 export const getAllCategories = async (req,res,next) => {
@@ -27,7 +28,26 @@ export const createCategory = async (req,res,next) => {
         next(error)
     }
 }
-export const updateCategory = async (req,res,next) => {
+export const updateCategory = async (req, res, next) => {
+    try {
+        const updatedCategory = await Category.findByIdAndUpdate(req.params.id, {...req.body})
+        if (!updatedCategory) {
+            const error = "The category doesn't exist"
+            error.statusCode = 404
+            throw error
+        }
+
+        res.status(200).json({
+            success: true,
+            message: 'Category successfully updated',
+            data: {
+                updateCategory
+            }
+
+        })
+    } catch (error) {
+        next(error)
+    }
 
 }
 export const deleteCateogry = async (req,res,next) => {
