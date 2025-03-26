@@ -7,6 +7,7 @@ import userRoutes from './routes/user.routes.js'
 import cartRoutes from './routes/cart.routes.js'
 import productRoutes from './routes/product.routes.js'
 import adminRoutes from './routes/admin.routes.js'
+import categoryRoutes from './routes/category.routes.js'
 import orderRoutes from './routes/order.routes.js'
 // Database
 import connectToDatabase from './database/mongodb.js'
@@ -31,6 +32,7 @@ app.use('/api/v1/carts/', cartRoutes)
 app.use('/api/v1/admin/', adminRoutes)
 app.use('/api/v1/orders/', orderRoutes)
 app.use('/api/v1/products/', productRoutes)
+app.use('/api/v1/category/', categoryRoutes)
 
 // Error Middleware 
 app.use(errMiddleware)
