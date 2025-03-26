@@ -6,8 +6,8 @@ export const getAllCategories = async (req,res,next) => {
         res.status(200).json({
             success: true,
             message: 'Found all categories',
-            categories,
             length: categories.length
+            categories,
         })
     } catch (error) {
         next(error)
