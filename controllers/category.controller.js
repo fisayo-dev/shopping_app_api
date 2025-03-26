@@ -1,4 +1,3 @@
-import { errorMonitor } from "nodemailer/lib/xoauth2/index.js"
 import Category from "../models/category.model.js"
 
 export const getAllCategories = async (req,res,next) => {
@@ -51,5 +50,18 @@ export const updateCategory = async (req, res, next) => {
 
 }
 export const deleteCateogry = async (req,res,next) => {
-
+    try {   
+        const categoryExist = await Category.findByIdAndDelete(req.params.id)
+        if (!categoryExist) {
+            const error = new Error('Oops, category does not exist')
+            error.statusCode = 404
+            throw error
+        }
+        res.status(200).json({
+            success: true,
+            message: "Your category has been successfully deleted"
+        })
+    } catch (error) {
+        next(error)
+    }
 }
