@@ -15,6 +15,13 @@ export const getAllCategories = async (req,res,next) => {
 }
 export const createCategory = async (req,res,next) => {
     try {
+        const {text} = req.body; 
+        const categoryExist = await Category.find({ text })
+        if (categoryExist) {
+            const error = new Error("The category name has already been taken")
+            error.statusCode = 404
+            throw error
+        }
         const newCategory = await Category.create({ ...req.body })
         res.status(201).json({
             success: true,
@@ -31,7 +38,7 @@ export const updateCategory = async (req, res, next) => {
     try {
         const updatedCategory = await Category.findByIdAndUpdate(req.params.id, {...req.body})
         if (!updatedCategory) {
-            const error = "The category doesn't exist"
+            const error = new Error("The category doesn't exist")
             error.statusCode = 404
             throw error
         }
