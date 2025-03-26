@@ -16,7 +16,7 @@ export const getAllCategories = async (req,res,next) => {
 export const createCategory = async (req,res,next) => {
     try {
         const {text} = req.body; 
-        const categoryExist = await Category.find({ text })
+        const categoryExist = await Category.findOne({ text })
         if (categoryExist) {
             const error = new Error("The category name has already been taken")
             error.statusCode = 404
