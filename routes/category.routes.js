@@ -1,10 +1,11 @@
 import { Router } from 'express'
+import adminMiddleware from '../middlewares/admin.middleware.js'
 
 const router = Router()
 
 router.get('/', getAllCategories)
-router.post('/', createCategory)
-router.put('/:id', updateCategory)
-router.delete('/:id', deleteCateogry)
+router.post('/', adminMiddleware, createCategory)
+router.put('/:id', adminMiddleware, updateCategory)
+router.delete('/:id', adminMiddleware, deleteCateogry)
 
 export default router
