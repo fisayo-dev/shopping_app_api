@@ -62,8 +62,13 @@ A robust and scalable API for a shopping application, built using **Node.js** an
 | POST   | `/api/v1/orders/make`      | Add a new order             |
 | GET    | `/api/v1/carts`    | Get items in cart             |
 | POST   | `/api/v1/carts`        | Create an item in cart               |
+| PUT   | `/api/v1/carts`        | Update cart quantity               |
 | DELETE   | `/api/v1/carts/clear`        | Clear all item in cart               |
 | DELETE   | `/api/v1/carts/remove/:id`        | Delete specific item in cart               |
+| GET    | `/api/v1/category`    | Get all categories            |
+| POST   | `/api/v1/category`        | Create a new category               |
+| PUT   | `/api/v1/category/:id`        | Update category text               |
+| DELETE   | `/api/v1/category/:id`        | Delete a category item               |
 
 ## 🔐 Authentication
 
