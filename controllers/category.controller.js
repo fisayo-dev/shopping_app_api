@@ -36,11 +36,13 @@ export const updateCategory = async (req, res, next) => {
             throw error
         }
 
+        const currentCategory = await Category.findById(req.params.id)
+
         res.status(200).json({
             success: true,
             message: 'Category successfully updated',
             data: {
-                updateCategory
+                currentCategory
             }
 
         })
