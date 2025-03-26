@@ -6,9 +6,10 @@ A robust and scalable API for a shopping application, built using **Node.js** an
 
 - **User Authentication** (JWT-based login & signup)  
 - **Product Management** (CRUD operations)  
+- **Admin Control & Access** 
 - **Cart & Order Management**  
-- **Payment Integration** (Stripe, Flutterwave, or preferred gateway)  
-- **Wishlist & Favorites**  
+- **Payment Integration (coming soon)** (Stripe, Flutterwave, or preferred gateway)  
+- **Wishlist & Favorites (coming soon)**  
 - **Secure & Optimized API Endpoints**  
 
 ## 🏗️ Tech Stack  
