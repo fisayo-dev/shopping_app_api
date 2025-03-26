@@ -14,7 +14,18 @@ export const getAllCategories = async (req,res,next) => {
     }
 }
 export const createCategory = async (req,res,next) => {
-
+    try {
+        const newCategory = await Category.create({ ...req.body })
+        res.status(201).json({
+            success: true,
+            message: `🆗 ${req.body.text} is now a category!`,
+            data: {
+                newCategory 
+            }
+        })
+    } catch (error) {
+        next(error)
+    }
 }
 export const updateCategory = async (req,res,next) => {
 
