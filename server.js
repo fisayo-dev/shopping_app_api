@@ -38,6 +38,9 @@ app.use("/api/v1/category/", categoryRoutes);
 app.use(errMiddleware);
 
 // Health route
+app.head("/health", (req, res) => {
+  res.status(200).json({ status: "OK", message: "Server is healthy" });
+});
 app.get("/health", (req, res) => {
   res.status(200).json({ status: "OK", message: "Server is healthy" });
 });
